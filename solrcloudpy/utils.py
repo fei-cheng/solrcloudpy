@@ -11,7 +11,7 @@ from requests.exceptions import ConnectionError, HTTPError
 try:
     from urllib.parse import urljoin
 except ImportError:
-    from urllib.parse import urljoin
+    from urlparse import urljoin
 try:
     str
 
@@ -19,7 +19,7 @@ try:
         if isinstance(value, str):
             return value.encode("utf-8", "ignore")
 
-
+        return value
 except NameError:
 
     def encodeUnicode(value):
@@ -323,7 +323,7 @@ class AsyncResponse(SolrResponse):
 
 class SolrResponseJSONEncoder(json.JSONEncoder):
     def default(self, o):
-        if type(o) == type(SolrResult({})):
+        if isinstance(o, SolrResult):
             val = str(o.__dict__)
             if len(val) > 200:
                 s = val[:100] + " ... "

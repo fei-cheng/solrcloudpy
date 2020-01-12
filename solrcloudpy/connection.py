@@ -14,9 +14,6 @@ To get a :class:`~solrcloudpy.SolrCollection` instance from a :class:`SolrConnec
 
 """
 import json
-import urllib.error
-import urllib.parse
-import urllib.request
 
 import semver
 from future.utils import iteritems
