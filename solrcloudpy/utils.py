@@ -54,7 +54,9 @@ class _Request(object):
         self.connection = connection
         self.client = requests.Session()
         self.timeout = connection.timeout
-        if self.connection.user:
+        if self.connection.auth:
+            self.client.auth = self.connection.auth
+        elif self.connection.user:
             self.client.auth = HTTPBasicAuth(
                 self.connection.user, self.connection.password
             )

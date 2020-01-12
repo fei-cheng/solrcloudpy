@@ -36,6 +36,8 @@ class SolrConnection(object):
     :param detect_live_nodes: whether to detect live nodes automativally or not. This assumes that one is able to access the IPs listed by Zookeeper. The default value is ``False``.
     :type detect_live_nodes: bool
 
+    :param auth: custom authentication. Example  ``HTTPKerberosAuth``
+    :type auth: object
     :param user: HTTP basic auth user name
     :type user: str
     :param password: HTTP basic auth password
@@ -56,6 +58,7 @@ class SolrConnection(object):
         self,
         server="localhost:8983",
         detect_live_nodes=False,
+        auth=None,
         user=None,
         password=None,
         timeout=10,
@@ -64,6 +67,7 @@ class SolrConnection(object):
         request_retries=1,
         use_https=False,
     ):
+        self.auth = auth
         self.user = user
         self.password = password
         self.timeout = timeout
